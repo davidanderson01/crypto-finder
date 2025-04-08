@@ -10,8 +10,20 @@
 {
     "configurations": [
         {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}",
+                "pipeProgram": "enter the fully qualified path for the pipe program name, for example '/usr/bin/ssh'",
+                "pipeArgs": [],
+                "debuggerPath": "enter the path for the debugger on the target machine, for example ~/vsdbg/vsdbg"
+            }
+        },
+
+        {
             "name": "Remote Debug IoT Edge Module (.NET Core)",
-            "type": "dotnet",
+            "type": "coreclr",
             "request": "attach",
             "processId": "${command:pickProcess}",
             "sourceFileMap": {
@@ -22,6 +34,7 @@
             "name": "Launch IoT Edge Module (.NET Core)",
             "type": "coreclr",
             "request": "launch",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp3.1/YourApp.dll",
             "args": "",
             "cwd": "${workspaceFolder}",
             "internalConsoleOptions": "openOnSessionStart",
