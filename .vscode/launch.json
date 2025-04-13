@@ -10,18 +10,60 @@
 {
     "configurations": [
         {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}",
+                "pipeProgram": "enter the fully qualified path for the pipe program name, for example '/usr/bin/ssh'",
+                "pipeArgs": [],
+                "debuggerPath": "enter the path for the debugger on the target machine, for example ~/vsdbg/vsdbg"
+            }
+        },
+
+        {
+            "name": "Remote Debug IoT Edge Module (.NET Core)",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}",
+            "sourceFileMap": {
+                "/app": "${workspaceFolder}"
+            }
+        },
+        {
+            "name": "Launch IoT Edge Module (.NET Core)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp3.1/YourApp.dll",
+            "args": "",
+            "cwd": "${workspaceFolder}",
+            "internalConsoleOptions": "openOnSessionStart",
+            "console": "internalConsole",
+            "env": {
+                "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",
+                "EdgeModuleCACertificateFile": "${config:azure-iot-edge.EdgeModuleCACertificateFile}"
+            }
+        },
+        {
             "name": "New Configuration",
             "type": "node",
             "request": "launch",
             "program": "${workspaceFolder}/app.js"
         },
         {
-            "command": "npm start",
             "name": "Run npm start",
+            "type": "node",
             "request": "launch",
-            "type": "node-terminal"
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "start"
+            ]
         },
         {
+            "name": "Mocha Tests",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
             "args": [
                 "-u",
                 "tdd",
@@ -31,95 +73,24 @@
                 "${workspaceFolder}/test"
             ],
             "internalConsoleOptions": "openOnSessionStart",
-            "name": "Mocha Tests",
-            "program": "mocha",
-            "request": "launch",
             "skipFiles": [
                 "<node_internals>/**"
-            ],
-            "type": "node"
+            ]
         },
         {
+            "name": "Yeoman generator",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/yo/lib/cli.js",
             "args": [
                 "generator"
             ],
-            "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
-            "name": "Yeoman generator",
-            "program": "${workspaceFolder}/node_modules/yo/lib/cli.js",
-            "request": "launch",
             "skipFiles": [
                 "<node_internals>/**"
-            ],
-            
-                                "type": "node"
-                            },
-                            {
-                                "args": [
-                                    "generator"
-                                ],
-                                "console": "integratedTerminal",
-                                "internalConsoleOptions": "neverOpen",
-                                "name": "Yeoman generator",
-                                "program": "${workspaceFolder}/node_modules/yo/lib/cli.js",
-                                "request": "launch",
-                                "skipFiles": [
-                                    "<node_internals>/**"
-                                ],
-                                "type": "node"
-                            }
-                        ]
-                    }
-                                                {
-                            "configurations": [
-                                {
-                                    "name": "New Configuration",
-                                    "type": "node",
-                                    "request": "launch",
-                                    "program": "${workspaceFolder}/app.js"
-                                },
-                                {
-                                    "command": "npm start",
-                                    "name": "Run npm start",
-                                    "request": "launch",
-                                    "type": "node-terminal"
-                                },
-                                {
-                                    "args": [
-                                        "-u",
-                                        "tdd",
-                                        "--timeout",
-                                        "999999",
-                                        "--colors",
-                                        "${workspaceFolder}/test"
-                                    ],
-                                    "internalConsoleOptions": "openOnSessionStart",
-                                    "name": "Mocha Tests",
-                                    "program": "mocha",
-                                    "request": "launch",
-                                    "skipFiles": [
-                                        "<node_internals>/**"
-                                    ],
-                                    "type": "node"
-                                },
-                                {
-                                    "args": [
-                                        "generator"
-                                    ],
-                                    "console": "integratedTerminal",
-                                    "internalConsoleOptions": "neverOpen",
-                                    "name": "Yeoman generator",
-                                    "program": "${workspaceFolder}/node_modules/yo/lib/cli.js",
-                                    "request": "launch",
-                                    "skipFiles": [
-                                        "<node_internals>/**"
-                                    ],
-                                    "type": "node"
-                                }
-                            ]
-                        }${selectedText}"
-                }
             ]
-    }
+        }
+    ]
+}
 
 
