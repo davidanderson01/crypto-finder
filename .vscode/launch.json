@@ -1,13 +1,8 @@
 // This is a launch configuration file for Visual Studio Code.
 // It contains various configurations for debugging different types of applications within the workspace.
 
-// The configurations include:
-// 1. Yeoman generator: Launches the Yeoman generator CLI.
-// 2. build task${defaultBuildTask}: Launches the extension host for development with a pre-launch npm task.
-// 3. Launch test function: Launches a Go test function named "MyTestFunction".
-// 4. .NET Core Launch (console): Launches a .NET Core console application with pipe transport for remote debugging.
-// 5. .NET Core Attach: Attaches the debugger to a running .NET Core process.
 {
+    "version": "0.2.0",
     "configurations": [
         {
             "name": ".NET Core Attach",
@@ -15,12 +10,11 @@
             "request": "attach",
             "pipeTransport": {
                 "pipeCwd": "${workspaceFolder}",
-                "pipeProgram": "enter the fully qualified path for the pipe program name, for example '/usr/bin/ssh'",
+                "pipeProgram": "/usr/bin/ssh", // Replace with the actual path to your SSH program
                 "pipeArgs": [],
-                "debuggerPath": "enter the path for the debugger on the target machine, for example ~/vsdbg/vsdbg"
+                "debuggerPath": "~/vsdbg/vsdbg" // Replace with the actual path to your debugger
             }
         },
-
         {
             "name": "Remote Debug IoT Edge Module (.NET Core)",
             "type": "coreclr",
@@ -35,7 +29,7 @@
             "type": "coreclr",
             "request": "launch",
             "program": "${workspaceFolder}/bin/Debug/netcoreapp3.1/YourApp.dll",
-            "args": "",
+            "args": [],
             "cwd": "${workspaceFolder}",
             "internalConsoleOptions": "openOnSessionStart",
             "console": "internalConsole",
@@ -45,10 +39,11 @@
             }
         },
         {
-            "name": "New Configuration",
+            "name": "Launch Node.js Application",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceFolder}/app.js"
+            "program": "${workspaceFolder}/app.js",
+            "console": "integratedTerminal"
         },
         {
             "name": "Run npm start",
@@ -57,7 +52,8 @@
             "runtimeExecutable": "npm",
             "runtimeArgs": [
                 "start"
-            ]
+            ],
+            "console": "integratedTerminal"
         },
         {
             "name": "Mocha Tests",
@@ -78,7 +74,7 @@
             ]
         },
         {
-            "name": "Yeoman generator",
+            "name": "Yeoman Generator",
             "type": "node",
             "request": "launch",
             "program": "${workspaceFolder}/node_modules/yo/lib/cli.js",
