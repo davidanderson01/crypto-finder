@@ -105,7 +105,6 @@
             "request": "attach",
             "port": 9229,
             "restart": true,
-            "protocol": "inspector",
             "skipFiles": ["<node_internals>/**"]
         },
         {
